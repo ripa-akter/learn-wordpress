@@ -8,7 +8,8 @@
       "Courier New", monospace;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --font-weight-light: 300;
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -26,11 +27,16 @@
     );
     --font-inter: "Inter", sans-serif;
     --text-64: 4rem;
+    --text-36: 2.25rem;
     --text-16: 1rem;
     --text-14: 0.875rem;
     --leading-76: 4.75rem;
     --color-primary: #4CAF4F;
+    --color-secondary: #F5F7FA;
+    --color-title: #4D4D4D;
+    --color-body: #717171;
     --radius-10: 0.625rem;
+    --radius-4: 0.25rem;
     --max-width-1152: 72rem;
     --padding-22: 1.375rem;
   }
@@ -183,6 +189,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
@@ -197,6 +206,9 @@
   }
   .flex {
     display: flex;
+  }
+  .grid {
+    display: grid;
   }
   .table {
     display: table;
@@ -216,6 +228,15 @@
   .resize {
     resize: both;
   }
+  .grid-flow-col {
+    grid-auto-flow: column;
+  }
+  .grid-flow-row {
+    grid-auto-flow: row;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -224,6 +245,9 @@
   }
   .justify-between {
     justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -240,6 +264,12 @@
   .gap-26 {
     gap: calc(var(--spacing) * 26);
   }
+  .gap-34 {
+    gap: calc(var(--spacing) * 34);
+  }
+  .rounded-4 {
+    border-radius: var(--radius-4);
+  }
   .rounded-10 {
     border-radius: var(--radius-10);
   }
@@ -250,11 +280,14 @@
   .bg-primary {
     background-color: var(--color-primary);
   }
-  .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
+  .bg-secondary {
+    background-color: var(--color-secondary);
   }
-  .px-2\.5 {
-    padding-inline: calc(var(--spacing) * 2.5);
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-3\.5 {
+    padding-inline: calc(var(--spacing) * 3.5);
   }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
@@ -286,22 +319,18 @@
   .font-inter {
     font-family: var(--font-inter);
   }
+  .text-5xl {
+    font-size: var(--text-5xl);
+    line-height: var(--tw-leading, var(--text-5xl--line-height));
+  }
   .text-14 {
     font-size: var(--text-14);
   }
   .text-16 {
     font-size: var(--text-16);
   }
-  .text-64 {
-    font-size: var(--text-64);
-  }
-  .leading-76 {
-    --tw-leading: var(--leading-76);
-    line-height: var(--leading-76);
-  }
-  .font-light {
-    --tw-font-weight: var(--font-weight-light);
-    font-weight: var(--font-weight-light);
+  .text-36 {
+    font-size: var(--text-36);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
@@ -315,8 +344,14 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .text-body {
+    color: var(--color-body);
+  }
   .text-primary {
     color: var(--color-primary);
+  }
+  .text-title {
+    color: var(--color-title);
   }
   .text-white {
     color: var(--color-white);
@@ -343,14 +378,29 @@
       margin-top: calc(var(--spacing) * 0);
     }
   }
+  .lg\:grid-flow-col {
+    @media (width >= 64rem) {
+      grid-auto-flow: column;
+    }
+  }
+  .lg\:grid-flow-row {
+    @media (width >= 64rem) {
+      grid-auto-flow: row;
+    }
+  }
+  .lg\:grid-rows-1 {
+    @media (width >= 64rem) {
+      grid-template-rows: repeat(1, minmax(0, 1fr));
+    }
+  }
   .lg\:flex-row {
     @media (width >= 64rem) {
       flex-direction: row;
     }
   }
-  .lg\:px-2\.5 {
+  .lg\:px-0 {
     @media (width >= 64rem) {
-      padding-inline: calc(var(--spacing) * 2.5);
+      padding-inline: calc(var(--spacing) * 0);
     }
   }
   .lg\:text-start {
@@ -358,15 +408,22 @@
       text-align: start;
     }
   }
+  .lg\:text-64 {
+    @media (width >= 64rem) {
+      font-size: var(--text-64);
+    }
+  }
+  .lg\:leading-76 {
+    @media (width >= 64rem) {
+      --tw-leading: var(--leading-76);
+      line-height: var(--leading-76);
+    }
+  }
 }
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
   initial-value: solid;
-}
-@property --tw-leading {
-  syntax: "*";
-  inherits: false;
 }
 @property --tw-font-weight {
   syntax: "*";
@@ -376,4 +433,8 @@
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
 }
